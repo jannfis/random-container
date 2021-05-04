@@ -1,3 +1,6 @@
+IMAGE_REGISTRY?=quay.io
+IMAGE_NAME?=test-image
+IMAGE_NAMESPACE?=jannfis
 IMAGE_TAG?=
 
 ifeq ($(IMAGE_TAG),)
@@ -7,7 +10,7 @@ endif
 .PHONY: image
 image:
 	echo $$RANDOM > src/sometoken
-	docker build -t quay.io/jannfis/test-image:$(IMAGE_TAG) -f Dockerfile .
+	docker build -t $(IMAGE_REGISTRY)/$(IMAGE_NAMESPACE)/$(IMAGE_NAME):$(IMAGE_TAG) -f Dockerfile .
 
 push:
-	docker push quay.io/jannfis/test-image:$(IMAGE_TAG)
+	docker push $(IMAGE_REGISTRY)/$(IMAGE_NAMESPACE)/$(IMAGE_NAME):$(IMAGE_TAG)
